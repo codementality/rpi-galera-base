@@ -122,7 +122,7 @@ echo '# End /etc/mysql/my.cnf'; \
 } > /etc/mysql/my.cnf \
 
 # && source /etc/profile.d/mysql \
- && /usr/local/mysql/scripts/mysql_install_db --user=mysql --datadir=/srv/mysql --basedir=/usr/local/mysql \
+ && mysql_install_db --user=mysql \
  && chown -R mysql:mysql /srv/mysql \
  && apt-get install -y libboost-program-options-dev check
 
