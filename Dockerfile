@@ -39,7 +39,7 @@ RUN echo "export PATH=\${PATH}:/usr/local/mysql/bin/" > /etc/profile.d/mysql \
  && mkdir -p /srv/mysql \
 
  && rm -rf /etc/mysql \
- && install -v -dm 755 /etc/mysql
+ && install -v -dm 755 /etc/mysql \
  && cat > /etc/mysql/my.cnf << "EOF"
 # Begin /etc/mysql/my.cnf
 
