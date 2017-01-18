@@ -40,7 +40,7 @@ RUN echo "export PATH=\${PATH}:/usr/local/mysql/bin/" > /etc/profile.d/mysql \
 
  && rm -rf /etc/mysql \
  && install -v -dm 755 /etc/mysql \
- && cat > /etc/mysql/my.cnf << "EOF" \
+ && { \
 # Begin /etc/mysql/my.cnf \
 # The following options will be passed to all MySQL clients \
 [client] \
@@ -109,7 +109,7 @@ write_buffer = 2M \
 interactive-timeout \
  \
 # End /etc/mysql/my.cnf \
-EOF \
+EOF } > /etc/mysql/my.cnf \
 
  && source /etc/profile.d/mysql \
  && /usr/local/mysql/scripts/mysql_install_db --user=mysql --datadir=/srv/mysql --basedir=/usr/local/mysql \
