@@ -2,7 +2,10 @@ FROM resin/rpi-raspbian:jessie
 
 MAINTAINER "Lisa Ridley, lhridley@gmail.com"
 
-## Dockerized version of https://gist.github.com/Lewiscowles1986/27cfeda001bb75a9151b5c974c2318bc
+## Some borrowed from https://gist.github.com/Lewiscowles1986/27cfeda001bb75a9151b5c974c2318bc
+## The rest from https://github.com/hypriot/rpi-mysql/blob/master/Dockerfile
+
+ENV MYSQL_VERSION 5.5
 
 RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib non-free rpi" > /etc/apt/sources.list.d/stretch.list \
  && echo "APT::Default-Release \"jessie\";" > /etc/apt/apt.conf.d/99-default-release \
@@ -22,21 +25,31 @@ RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib 
  && apt-get install -t stretch -y \
     libncurses5-dev \
     libbison-dev \
-    bison
+    bison \
 
-RUN cd /tmp \
- && git clone -b 10.1 https://github.com/MariaDB/server.git --depth=1 mariadb-server-src \
- && cd mariadb-server-src \
- && cmake -DWITH_WSREP=ON -DWITH_INNODB_DISALLOW_WRITES=ON ./ \
- && make \
- && make install \
+ # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+ && groupadd -r mysql && useradd -r -g mysql mysql \
 
- && cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld \
- && update-rc.d mysqld defaults
+ # FATAL ERROR: please install the following Perl modules before executing /usr/local/mysql/scripts/mysql_install_db:
+ # File::Basename
+ # File::Copy
+ # Sys::Hostname
+ # Data::Dumper
+ && apt-get update && apt-get install -y perl --no-install-recommends && rm -rf /var/lib/apt/lists/* \
 
-RUN echo "export PATH=\${PATH}:/usr/local/mysql/bin/" > /etc/profile.d/mysql \
+ # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
+ # also, we set debconf keys to make APT a little quieter
+ && { \
+ 		echo mysql-server mysql-server/data-dir select ''; \
+ 		echo mysql-server mysql-server/root-pass password ''; \
+ 		echo mysql-server mysql-server/re-root-pass password ''; \
+ 		echo mysql-server mysql-server/remove-test-db select false; \
+ 	} | debconf-set-selections \
+ 	&& apt-get update && apt-get install -y mysql-server="${MYSQL_VERSION}"* && rm -rf /var/lib/apt/lists/* \
+ 	&& rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql && chown -R mysql:mysql /var/lib/mysql \
+
+ && echo "export PATH=\${PATH}:/usr/local/mysql/bin/" > /etc/profile.d/mysql \
  && groupadd mysql && useradd -g mysql mysql \
- && mkdir -p /srv/mysql \
 
  && rm -rf /etc/mysql \
  && install -v -dm 755 /etc/mysql \
@@ -116,7 +129,16 @@ echo '# End /etc/mysql/my.cnf'; \
  && chown -R mysql:mysql /srv/mysql \
  && apt-get install -y libboost-program-options-dev check
 
-RUN cd /tmp \
+ && cd /tmp \
  && git clone https://github.com/codership/galera --depth=1 \
  && cd galera \
  && scons
+
+VOLUME /var/lib/mysql
+
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
+
+EXPOSE 3306 4567 4568 4444 13306
+
+CMD ["mysqld"]
