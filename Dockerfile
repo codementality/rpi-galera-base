@@ -90,7 +90,7 @@ echo 'max_allowed_packet = 16M'; \
 echo ''; \
 echo '[mysql]'; \
 echo 'no-auto-rehash'; \
-echo '# Remove the next comment character if you are not familiar with SQL' \
+echo '# Remove the next comment character if you are not familiar with SQL'; \
 echo '#safe-updates'; \
 echo ''; \
 echo '[isamchk]'; \
