@@ -83,32 +83,32 @@ echo 'innodb_log_file_size = 5M'; \
 echo 'innodb_log_buffer_size = 8M'; \
 echo 'innodb_flush_log_at_trx_commit = 1'; \
 echo 'innodb_lock_wait_timeout = 50'; \
-#echo ''; \
-#echo '[mysqldump]'; \
-#echo 'quick'; \
-#echo 'max_allowed_packet = 16M'; \
-#echo ''; \
-#echo '[mysql]'; \
-#echo 'no-auto-rehash'; \
-#echo '# Remove the next comment character if you are not familiar with SQL'; \
-#echo '#safe-updates'; \
-#echo ''; \
-#echo '[isamchk]'; \
-#echo 'key_buffer = 20M'; \
-#echo 'sort_buffer_size = 20M'; \
-#echo 'read_buffer = 2M'; \
-#echo 'write_buffer = 2M'; \
-#echo ''; \
-#echo '[myisamchk]'; \
-#echo 'key_buffer_size = 20M'; \
-#echo 'sort_buffer_size = 20M'; \
-#echo 'read_buffer = 2M'; \
-#echo 'write_buffer = 2M'; \
-#echo ''; \
-#echo '[mysqlhotcopy]'; \
-#echo 'interactive-timeout'; \
-#echo ''; \
-#echo '# End /etc/mysql/my.cnf'; \
+echo ''; \
+echo '[mysqldump]'; \
+echo 'quick'; \
+echo 'max_allowed_packet = 16M'; \
+echo ''; \
+echo '[mysql]'; \
+echo 'no-auto-rehash'; \
+echo '# Remove the next comment character if you are not familiar with SQL'; \
+echo '#safe-updates'; \
+echo ''; \
+echo '[isamchk]'; \
+echo 'key_buffer = 20M'; \
+echo 'sort_buffer_size = 20M'; \
+echo 'read_buffer = 2M'; \
+echo 'write_buffer = 2M'; \
+echo ''; \
+echo '[myisamchk]'; \
+echo 'key_buffer_size = 20M'; \
+echo 'sort_buffer_size = 20M'; \
+echo 'read_buffer = 2M'; \
+echo 'write_buffer = 2M'; \
+echo ''; \
+echo '[mysqlhotcopy]'; \
+echo 'interactive-timeout'; \
+echo ''; \
+echo '# End /etc/mysql/my.cnf'; \
 } > /etc/mysql/my.cnf \
 
 # && source /etc/profile.d/mysql \
