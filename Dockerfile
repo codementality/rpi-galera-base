@@ -48,18 +48,18 @@ echo '#password       = your_password'; \
 echo 'port            = 3306'; \
 echo 'socket          = /run/mysqld/mysqld.sock'; \
 echo ''; \
-#echo '# The MySQL server'; \
-#echo '[mysqld]'; \
-#echo 'port            = 3306'; \
-#echo 'socket          = /run/mysqld/mysqld.sock'; \
-#echo 'datadir         = /srv/mysql'; \
-#echo 'skip-external-locking'; \
-#echo 'key_buffer_size = 16M'; \
-#echo 'max_allowed_packet = 1M'; \
-#echo 'sort_buffer_size = 512K'; \
-#echo 'net_buffer_length = 16K'; \
-#echo 'myisam_sort_buffer_size = 8M'; \
-#echo ''; \
+echo '# The MySQL server'; \
+echo '[mysqld]'; \
+echo 'port            = 3306'; \
+echo 'socket          = /run/mysqld/mysqld.sock'; \
+echo 'datadir         = /srv/mysql'; \
+echo 'skip-external-locking'; \
+echo 'key_buffer_size = 16M'; \
+echo 'max_allowed_packet = 1M'; \
+echo 'sort_buffer_size = 512K'; \
+echo 'net_buffer_length = 16K'; \
+echo 'myisam_sort_buffer_size = 8M'; \
+echo ''; \
 #echo '# Don\'t listen on a TCP/IP port at all.'; \
 #echo 'skip-networking'; \
 #echo ''; \
@@ -111,7 +111,7 @@ echo ''; \
 #echo '# End /etc/mysql/my.cnf'; \
 } > /etc/mysql/my.cnf \
 
- && source /etc/profile.d/mysql \
+# && source /etc/profile.d/mysql \
  && /usr/local/mysql/scripts/mysql_install_db --user=mysql --datadir=/srv/mysql --basedir=/usr/local/mysql \
  && chown -R mysql:mysql /srv/mysql \
  && apt-get install -y libboost-program-options-dev check
