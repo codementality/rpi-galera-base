@@ -27,9 +27,6 @@ RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib 
     libbison-dev \
     bison \
 
- # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
- #&& groupadd -r mysql && useradd -r -g mysql mysql \
-
  # FATAL ERROR: please install the following Perl modules before executing /usr/local/mysql/scripts/mysql_install_db:
  # File::Basename
  # File::Copy
@@ -49,7 +46,7 @@ RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib 
  	&& rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql && chown -R mysql:mysql /var/lib/mysql \
 
  && echo "export PATH=\${PATH}:/usr/local/mysql/bin/" > /etc/profile.d/mysql \
- && groupadd mysql && useradd -g mysql mysql \
+ #&& groupadd mysql && useradd -g mysql mysql \
 
  && rm -rf /etc/mysql \
  && install -v -dm 755 /etc/mysql \
