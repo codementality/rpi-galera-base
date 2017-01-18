@@ -21,11 +21,12 @@ RUN apt-get update -y && apt-get upgrade -y \
     libarchive-dev \
     libevent-dev \
     libssl-dev \
-    libboost-dev \
  && apt-get install -t stretch -y \
+    libboost-dev \
     libboost-program-options-dev \
     libncurses5-dev \
     libbison-dev \
+    boost \
     check \
     bison \
 
