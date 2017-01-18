@@ -26,7 +26,7 @@ RUN apt-get update -y && apt-get upgrade -y \
     libboost-program-options-dev \
     libncurses5-dev \
     libbison-dev \
-    boost \
+    boost-dev \
     check \
     bison \
 
