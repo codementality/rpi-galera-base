@@ -60,7 +60,7 @@ echo 'sort_buffer_size = 512K'; \
 echo 'net_buffer_length = 16K'; \
 echo 'myisam_sort_buffer_size = 8M'; \
 echo ''; \
-echo '# Don't listen on a TCP/IP port at all.'; \
+echo '# Don\'t listen on a TCP/IP port at all.'; \
 echo 'skip-networking'; \
 echo ''; \
 echo '# required unique id between 1 and 2^32 - 1'; \
