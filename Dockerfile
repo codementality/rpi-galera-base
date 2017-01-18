@@ -12,7 +12,7 @@ RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib 
 
  && apt-get update -y && apt-get upgrade -y \
  && apt-get dist-upgrade -y \
- && apt-get install -y \
+ && apt-get install -t jessie -y \
     build-essential \
     git \
     cmake \
@@ -32,7 +32,7 @@ RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib 
  # File::Copy
  # Sys::Hostname
  # Data::Dumper
- && apt-get install -y perl --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+ && apt-get install -t jessie -y perl --no-install-recommends && rm -rf /var/lib/apt/lists/* \
 
  # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
  # also, we set debconf keys to make APT a little quieter
@@ -42,7 +42,7 @@ RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib 
  		echo mysql-server mysql-server/re-root-pass password ''; \
  		echo mysql-server mysql-server/remove-test-db select false; \
  	} | debconf-set-selections \
- 	&& apt-get update && apt-get install -y mysql-server="${MYSQL_VERSION}"* && rm -rf /var/lib/apt/lists/* \
+ 	&& apt-get update && apt-get install -t jessie -y mysql-server="${MYSQL_VERSION}"* && rm -rf /var/lib/apt/lists/* \
  	&& rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql && chown -R mysql:mysql /var/lib/mysql \
 
  && echo "export PATH=\${PATH}:/usr/local/mysql/bin/" > /etc/profile.d/mysql \
@@ -124,7 +124,7 @@ echo '# End /etc/mysql/my.cnf'; \
 # && source /etc/profile.d/mysql \
  && mysql_install_db --user=mysql \
  && chown -R mysql:mysql /srv/mysql \
- && apt-get install -y libboost-program-options-dev check
+ && apt-get install -t jessie -y libboost-program-options-dev check
 
  && cd /tmp \
  && git clone https://github.com/codership/galera --depth=1 \
