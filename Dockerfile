@@ -35,7 +35,7 @@ RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib 
  # File::Copy
  # Sys::Hostname
  # Data::Dumper
- && apt-get update && apt-get install -y perl --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+ && apt-get install -y perl --no-install-recommends && rm -rf /var/lib/apt/lists/* \
 
  # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
  # also, we set debconf keys to make APT a little quieter
