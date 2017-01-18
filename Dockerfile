@@ -50,7 +50,7 @@ echo 'socket          = /run/mysqld/mysqld.sock'; \
 echo ''; \
 echo '# The MySQL server'; \
 echo '[mysqld]'; \
-eco 'port            = 3306'; \
+echo 'port            = 3306'; \
 echo 'socket          = /run/mysqld/mysqld.sock'; \
 echo 'datadir         = /srv/mysql'; \
 echo 'skip-external-locking'; \
