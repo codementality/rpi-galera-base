@@ -60,29 +60,29 @@ echo 'sort_buffer_size = 512K'; \
 echo 'net_buffer_length = 16K'; \
 echo 'myisam_sort_buffer_size = 8M'; \
 echo ''; \
-#echo '# Don\'t listen on a TCP/IP port at all.'; \
-#echo 'skip-networking'; \
-#echo ''; \
-#echo '# required unique id between 1 and 2^32 - 1'; \
-#echo 'server-id       = 1'; \
-#echo ''; \
-#echo '# Uncomment the following if you are using BDB tables'; \
-#echo '#bdb_cache_size = 4M'; \
-#echo '#bdb_max_lock = 10000'; \
-#echo ''; \
-#echo '# InnoDB tables are now used by default'; \
-#echo 'innodb_data_home_dir = /srv/mysql'; \
-#echo 'innodb_data_file_path = ibdata1:10M:autoextend'; \
-#echo 'innodb_log_group_home_dir = /srv/mysql'; \
-#echo '# You can set .._buffer_pool_size up to 50 - 80 %'; \
-#echo '# of RAM but beware of setting memory usage too high'; \
-#echo 'innodb_buffer_pool_size = 16M'; \
-#echo 'innodb_additional_mem_pool_size = 2M'; \
-#echo '# Set .._log_file_size to 25 % of buffer pool size'; \
-#echo 'innodb_log_file_size = 5M'; \
-#echo 'innodb_log_buffer_size = 8M'; \
-#echo 'innodb_flush_log_at_trx_commit = 1'; \
-#echo 'innodb_lock_wait_timeout = 50'; \
+echo '# Dont listen on a TCP/IP port at all.'; \
+echo 'skip-networking'; \
+echo ''; \
+echo '# required unique id between 1 and 2 to the 32 - 1'; \
+echo 'server-id       = 1'; \
+echo ''; \
+echo '# Uncomment the following if you are using BDB tables'; \
+echo '#bdb_cache_size = 4M'; \
+echo '#bdb_max_lock = 10000'; \
+echo ''; \
+echo '# InnoDB tables are now used by default'; \
+echo 'innodb_data_home_dir = /srv/mysql'; \
+echo 'innodb_data_file_path = ibdata1:10M:autoextend'; \
+echo 'innodb_log_group_home_dir = /srv/mysql'; \
+echo '# You can set .._buffer_pool_size up to 50 - 80 %'; \
+echo '# of RAM but beware of setting memory usage too high'; \
+echo 'innodb_buffer_pool_size = 16M'; \
+echo 'innodb_additional_mem_pool_size = 2M'; \
+echo '# Set .._log_file_size to 25 % of buffer pool size'; \
+echo 'innodb_log_file_size = 5M'; \
+echo 'innodb_log_buffer_size = 8M'; \
+echo 'innodb_flush_log_at_trx_commit = 1'; \
+echo 'innodb_lock_wait_timeout = 50'; \
 #echo ''; \
 #echo '[mysqldump]'; \
 #echo 'quick'; \
