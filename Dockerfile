@@ -8,7 +8,7 @@ MAINTAINER "Lisa Ridley, lhridley@gmail.com"
 ENV MYSQL_VERSION 5.5
 
 RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib non-free rpi" > /etc/apt/sources.list.d/stretch.list \
- && echo "APT::Default-Release \"jessie\";" > /etc/apt/apt.conf.d/99-default-release \
+# && echo "APT::Default-Release \"jessie\";" > /etc/apt/apt.conf.d/99-default-release \
 
  && apt-get update -y && apt-get upgrade -y \
  && apt-get dist-upgrade -y \
