@@ -134,6 +134,20 @@ echo '# End /etc/mysql/my.cnf'; \
  && cd galera \
  && scons
 
+ && apt-get purge -y --auto-remove \
+     build-essential \
+     git \
+     cmake \
+     scons \
+     rpi-update \
+     libarchive-dev \
+     libevent-dev \
+     libssl-dev \
+     libboost-dev \
+     libncurses5-dev \
+     libbison-dev \
+     bison
+
 VOLUME /var/lib/mysql
 
 COPY entrypoint.sh /
