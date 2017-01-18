@@ -41,75 +41,75 @@ RUN echo "export PATH=\${PATH}:/usr/local/mysql/bin/" > /etc/profile.d/mysql \
  && rm -rf /etc/mysql \
  && install -v -dm 755 /etc/mysql \
  && { \
-# Begin /etc/mysql/my.cnf \
-# The following options will be passed to all MySQL clients \
-[client] \
-#password       = your_password \
-port            = 3306 \
-socket          = /run/mysqld/mysqld.sock \
- \
-# The MySQL server \
-[mysqld] \
-port            = 3306 \
-socket          = /run/mysqld/mysqld.sock \
-datadir         = /srv/mysql \
-skip-external-locking \
-key_buffer_size = 16M \
-max_allowed_packet = 1M \
-sort_buffer_size = 512K \
-net_buffer_length = 16K \
-myisam_sort_buffer_size = 8M \
- \
-# Don't listen on a TCP/IP port at all. \
-skip-networking \
- \
-# required unique id between 1 and 2^32 - 1 \
-server-id       = 1 \
- \
-# Uncomment the following if you are using BDB tables \
-#bdb_cache_size = 4M \
-#bdb_max_lock = 10000 \
- \
-# InnoDB tables are now used by default \
-innodb_data_home_dir = /srv/mysql \
-innodb_data_file_path = ibdata1:10M:autoextend \
-innodb_log_group_home_dir = /srv/mysql \
-# You can set .._buffer_pool_size up to 50 - 80 % \
-# of RAM but beware of setting memory usage too high \
-innodb_buffer_pool_size = 16M \
-innodb_additional_mem_pool_size = 2M \
-# Set .._log_file_size to 25 % of buffer pool size \
-innodb_log_file_size = 5M \
-innodb_log_buffer_size = 8M \
-innodb_flush_log_at_trx_commit = 1 \
-innodb_lock_wait_timeout = 50 \
- \
-[mysqldump] \
-quick \
-max_allowed_packet = 16M \
- \
-[mysql] \
-no-auto-rehash \
-# Remove the next comment character if you are not familiar with SQL \
-#safe-updates \
- \
-[isamchk] \
-key_buffer = 20M \
-sort_buffer_size = 20M \
-read_buffer = 2M \
-write_buffer = 2M \
- \
-[myisamchk] \
-key_buffer_size = 20M \
-sort_buffer_size = 20M \
-read_buffer = 2M \
-write_buffer = 2M \
- \
-[mysqlhotcopy] \
-interactive-timeout \
- \
-# End /etc/mysql/my.cnf \
-EOF } > /etc/mysql/my.cnf \
+echo '# Begin /etc/mysql/my.cnf'; \
+echo '# The following options will be passed to all MySQL clients'; \
+echo '[client]'; \
+echo '#password       = your_password'; \
+echo 'port            = 3306'; \
+echo 'socket          = /run/mysqld/mysqld.sock'; \
+echo ''; \
+echo '# The MySQL server'; \
+echo '[mysqld]'; \
+echo 'port            = 3306'; \
+echo 'socket          = /run/mysqld/mysqld.sock'; \
+echo 'datadir         = /srv/mysql'; \
+echo 'skip-external-locking'; \
+echo 'key_buffer_size = 16M'; \
+echo 'max_allowed_packet = 1M'; \
+echo 'sort_buffer_size = 512K'; \
+echo 'net_buffer_length = 16K'; \
+echo 'myisam_sort_buffer_size = 8M'; \
+echo ''; \
+echo '# Don't listen on a TCP/IP port at all.'; \
+echo 'skip-networking'; \
+echo ''; \
+echo '# required unique id between 1 and 2^32 - 1'; \
+echo 'server-id       = 1'; \
+echo ''; \
+echo '# Uncomment the following if you are using BDB tables'; \
+echo '#bdb_cache_size = 4M'; \
+echo '#bdb_max_lock = 10000'; \
+echo ''; \
+echo '# InnoDB tables are now used by default'; \
+echo 'innodb_data_home_dir = /srv/mysql'; \
+echo 'innodb_data_file_path = ibdata1:10M:autoextend'; \
+echo 'innodb_log_group_home_dir = /srv/mysql'; \
+echo '# You can set .._buffer_pool_size up to 50 - 80 %'; \
+echo '# of RAM but beware of setting memory usage too high'; \
+echo 'innodb_buffer_pool_size = 16M'; \
+echo 'innodb_additional_mem_pool_size = 2M'; \
+echo '# Set .._log_file_size to 25 % of buffer pool size'; \
+echo 'innodb_log_file_size = 5M'; \
+echo 'innodb_log_buffer_size = 8M'; \
+echo 'innodb_flush_log_at_trx_commit = 1'; \
+echo 'innodb_lock_wait_timeout = 50'; \
+echo ''; \
+echo '[mysqldump]'; \
+echo 'quick'; \
+echo 'max_allowed_packet = 16M'; \
+echo ''; \
+echo '[mysql]'; \
+echo 'no-auto-rehash'; \
+echo '# Remove the next comment character if you are not familiar with SQL' \
+echo '#safe-updates'; \
+echo ''; \
+echo '[isamchk]'; \
+echo 'key_buffer = 20M'; \
+echo 'sort_buffer_size = 20M'; \
+echo 'read_buffer = 2M'; \
+echo 'write_buffer = 2M'; \
+echo ''; \
+echo '[myisamchk]'; \
+echo 'key_buffer_size = 20M'; \
+echo 'sort_buffer_size = 20M'; \
+echo 'read_buffer = 2M'; \
+echo 'write_buffer = 2M'; \
+echo ''; \
+echo '[mysqlhotcopy]'; \
+echo 'interactive-timeout'; \
+echo ''; \
+echo '# End /etc/mysql/my.cnf'; \
+} > /etc/mysql/my.cnf \
 
  && source /etc/profile.d/mysql \
  && /usr/local/mysql/scripts/mysql_install_db --user=mysql --datadir=/srv/mysql --basedir=/usr/local/mysql \
