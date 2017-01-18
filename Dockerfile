@@ -7,8 +7,8 @@ MAINTAINER "Lisa Ridley, lhridley@gmail.com"
 
 ENV MYSQL_VERSION 5.5
 
-#RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib non-free rpi" > /etc/apt/sources.list.d/stretch.list \
-# && echo "APT::Default-Release \"jessie\";" > /etc/apt/apt.conf.d/99-default-release \
+RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib non-free rpi" > /etc/apt/sources.list.d/stretch.list \
+ && echo "APT::Default-Release \"jessie\";" > /etc/apt/apt.conf.d/99-default-release \
 
 RUN apt-get update -y && apt-get upgrade -y \
  && apt-get dist-upgrade -y \
@@ -22,9 +22,11 @@ RUN apt-get update -y && apt-get upgrade -y \
     libevent-dev \
     libssl-dev \
     libboost-dev \
-# && apt-get install -t stretch -y \
+ && apt-get install -t stretch -y \
+    libboost-program-options-dev \
     libncurses5-dev \
     libbison-dev \
+    check \
     bison \
 
  # FATAL ERROR: please install the following Perl modules before executing /usr/local/mysql/scripts/mysql_install_db:
@@ -124,7 +126,6 @@ echo '# End /etc/mysql/my.cnf'; \
 # && source /etc/profile.d/mysql \
  && mysql_install_db --user=mysql \
  && chown -R mysql:mysql /srv/mysql \
- && apt-get install -y libboost-program-options-dev check
 
  && cd /tmp \
  && git clone https://github.com/codership/galera --depth=1 \
@@ -143,6 +144,8 @@ echo '# End /etc/mysql/my.cnf'; \
      libboost-dev \
      libncurses5-dev \
      libbison-dev \
+     libboost-program-options-dev \
+     check \
      bison
 
 VOLUME /var/lib/mysql
